@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AGENTS.md trim verification</title>
+  <style>
+    :root { color-scheme: light; --ink:#17211b; --muted:#5b685f; --paper:#f7f4ec; --card:#fffdf7; --green:#1d6b45; --line:#d9d4c7; --blue:#235b8b; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.5 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    main { width:min(1100px, calc(100% - 32px)); margin:38px auto 64px; }
+    header { border-bottom:3px solid var(--ink); padding-bottom:22px; }
+    .eyebrow { color:var(--green); font-weight:800; letter-spacing:.08em; text-transform:uppercase; font-size:12px; }
+    h1 { font:700 clamp(34px, 6vw, 64px)/1.02 ui-serif, Georgia, serif; margin:8px 0 12px; }
+    h2 { margin:0 0 14px; font-size:22px; }
+    h3 { margin:0 0 8px; font-size:16px; }
+    p { margin:0; }
+    .lead { color:var(--muted); font-size:18px; max-width:760px; }
+    .metrics { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin:24px 0; }
+    .metric, .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; min-width:0; }
+    .metric strong { display:block; font-size:30px; line-height:1.1; }
+    .metric span { color:var(--muted); font-size:13px; }
+    .ok { color:var(--green); font-weight:800; }
+    .grid { display:grid; grid-template-columns:1.1fr .9fr; gap:18px; margin-top:18px; }
+    ul { margin:8px 0 0; padding-left:20px; }
+    li + li { margin-top:7px; }
+    code { font:13px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; background:#efede5; padding:2px 5px; border-radius:5px; overflow-wrap:anywhere; }
+    .flow { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:12px; }
+    .flow div { border-left:4px solid var(--blue); background:#f4f8fb; padding:12px; border-radius:6px; }
+    table { width:100%; border-collapse:collapse; margin-top:8px; }
+    th, td { border-bottom:1px solid var(--line); padding:10px 8px; text-align:left; vertical-align:top; }
+    th { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.05em; }
+    .wide { grid-column:1 / -1; }
+    footer { color:var(--muted); margin-top:24px; font-size:13px; }
+    @media (max-width:760px) { .metrics { grid-template-columns:repeat(2,minmax(0,1fr)); } .grid { grid-template-columns:1fr; } .flow { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">Reviewer-visible test evidence · target 655067b</div>
+    <h1>AGENTS.md is smaller without widening the trim.</h1>
+    <p class="lead">The committed document changes only the five captain-approved trim areas plus the required loaded-surface clarification. Dispatch/quota and backlog remain byte-identical.</p>
+  </header>
+
+  <section class="metrics" aria-label="Size results">
+    <div class="metric"><strong>86,955</strong><span>base bytes</span></div>
+    <div class="metric"><strong>61,065</strong><span>target bytes</span></div>
+    <div class="metric"><strong>25,890</strong><span>bytes removed</span></div>
+    <div class="metric"><strong>29.77%</strong><span>real byte reduction</span></div>
+  </section>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Scope boundary</h2>
+      <h3 class="ok">✓ Exactly the intended surfaces changed</h3>
+      <ul>
+        <li>§2 Layout and state</li>
+        <li>§3 Session start</li>
+        <li>§6 Project and knowledge management</li>
+        <li>§11 Crewmate briefs</li>
+        <li>§12 Self-update wording</li>
+        <li>§14 Relay</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2>Forbidden edits</h2>
+      <table>
+        <tr><th>Section</th><th>Result</th><th>Bytes</th></tr>
+        <tr><td>§4 Harness and runtime dispatch</td><td class="ok">Byte-identical</td><td>4,500</td></tr>
+        <tr><td>§10 Backlog contract</td><td class="ok">Byte-identical</td><td>2,505</td></tr>
+      </table>
+    </section>
+
+    <section class="card wide">
+      <h2>Loaded surfaces are now distinguished</h2>
+      <div class="flow">
+        <div><strong>Full body</strong><br><code>CLAUDE.md</code> imports <code>AGENTS.md</code>.</div>
+        <div><strong>Worker launch</strong><br>Ship and scout workers receive their launch brief.</div>
+        <div><strong>Catalog exposure</strong><br>Skill metadata is advertised before a full skill body is loaded.</div>
+      </div>
+    </section>
+
+    <section class="card wide">
+      <h2>Removed detail still has named owners</h2>
+      <table>
+        <tr><th>Trimmed area</th><th>Inline contract now routes to</th></tr>
+        <tr><td>Layout/state inventory</td><td><code>docs/configuration.md</code> and producing script headers/help</td></tr>
+        <tr><td>Digest mechanics</td><td><code>bin/fm-session-start.sh</code>, <code>bin/fm-startup-network.sh</code>, <code>docs/sessionstart-nudge.md</code></td></tr>
+        <tr><td>Project/knowledge detail</td><td><code>project-management</code>, <code>secondmate-provisioning</code>, <code>stow</code>, and <code>bin/fm-ensure-agents-md.sh</code></td></tr>
+        <tr><td>Brief detail</td><td><code>bin/fm-brief.sh</code> header/help, generated scaffold, and <code>bin/fm-dod-lib.sh</code></td></tr>
+        <tr><td>Relay detail</td><td><code>docs/configuration.md</code> and <code>fmx-respond</code></td></tr>
+      </table>
+    </section>
+
+    <section class="card wide">
+      <h2>Executable documentation validation</h2>
+      <p class="ok">✓ Audience inventory, required owner pointers, and all 466 local links validated.</p>
+      <p style="margin-top:8px;color:var(--muted)">Focused regression fixtures also proved duplicate classifications, invalid setup routing, missing owner pointers, and broken local links fail with actionable diagnostics.</p>
+    </section>
+  </div>
+  <footer>Compared commits 9296f9b → 655067b. Generated during the targeted no-mistakes test phase on 2026-09-23.</footer>
+</main>
+</body>
+</html>
