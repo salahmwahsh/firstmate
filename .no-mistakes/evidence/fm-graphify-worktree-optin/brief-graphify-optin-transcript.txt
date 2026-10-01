@@ -1,0 +1,21 @@
+# config/graphify-worktree ABSENT (default)
+$ fm-brief.sh off-ship sample --mode direct-PR
+  graphify lines: 0
+  | You are in a disposable git worktree of sample, at a detached HEAD on a clean default branch.
+  | 
+$ fm-brief.sh off-scout sample --scout
+  graphify lines: 0
+  | You are in a disposable git worktree of sample, at a detached HEAD on a clean default branch.
+  | This is a SCOUT task: the deliverable is a written report, not a PR.
+
+$ touch config/graphify-worktree   # opt in
+$ fm-brief.sh on-ship sample --mode direct-PR
+  graphify lines: 1
+  | You are in a disposable git worktree of sample, at a detached HEAD on a clean default branch.
+  | If `graphify-out/` exists in the worktree, answer codebase questions with `graphify query "<question>" --budget N` before reaching for grep or bulk file reads.
+$ fm-brief.sh on-scout sample --scout
+  graphify lines: 1
+  | You are in a disposable git worktree of sample, at a detached HEAD on a clean default branch.
+  | If `graphify-out/` exists in the worktree, answer codebase questions with `graphify query "<question>" --budget N` before reaching for grep or bulk file reads.
+$ fm-brief.sh on-mate --secondmate sample
+  graphify lines: 0

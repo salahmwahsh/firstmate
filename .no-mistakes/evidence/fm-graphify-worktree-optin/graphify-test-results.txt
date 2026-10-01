@@ -1,0 +1,7 @@
+spawn.log:ok - spawn links graphify-out into task worktrees only when config/graphify-worktree is present
+spawn.log:ok - an aborted spawn removes the graphify-out link it created
+spawn.log:ok - an interrupted committed spawn preserves its graphify-out link
+td.log:ok - teardown removes its owned graphify-out symlink after the opt-in is removed
+td.log:ok - teardown preserves a same-target graphify-out symlink without a spawn ownership record
+td.log:ok - teardown preserves unrelated graphify-out symlinks as uncommitted work
+brief.log:ok - fm-brief.sh: config/graphify-worktree controls graphify guidance for ship and scout briefs
